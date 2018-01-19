@@ -5,7 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 //ADD INCLUDE"S HERE
-
+#include "Tank.h"
 
 #include "TankPlayerController.generated.h"
 
@@ -17,7 +17,9 @@ class TANKARMADA_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-	
-	
+public:
+
+	ATank * GetControlledTank() const;
+
 	
 };
