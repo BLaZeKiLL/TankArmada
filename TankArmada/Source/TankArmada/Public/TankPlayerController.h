@@ -18,8 +18,18 @@ class TANKARMADA_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
+	
+	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaTime) override;
+
+private:
 
 	ATank * GetControlledTank() const;
-	
-	void BeginPlay() override;
+
+	// Start the tank moving the barrel so the shot would hit where
+	// cross hair intersects the world
+	void AimTowardsCrosshair();
+
+	bool GetSightRayHitLocation(FVector& HitLocation) const;
 };
