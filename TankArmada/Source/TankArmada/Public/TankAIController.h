@@ -1,13 +1,13 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Property of D4L4L
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "AIController.h"
-//ADD INCLUDES BELOW
+// ADD INCLUDES BELOW
 #include "Tank.h"
-
-
+#include "Engine/World.h"
+// ABOVE HERE
 #include "TankAIController.generated.h"
 
 /**
@@ -20,9 +20,11 @@ class TANKARMADA_API ATankAIController : public AAIController
 	
 public:
 
-	ATank * GetControlledTank() const;
+	virtual void BeginPlay() override;
+	
+private:
 
-	void BeginPlay() override;
-	
-	
+	ATank* GetControlledTank() const;
+
+	ATank* GetPlayerTank() const;
 };

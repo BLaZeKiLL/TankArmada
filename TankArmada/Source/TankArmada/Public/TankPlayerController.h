@@ -1,12 +1,12 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Property of D4L4L
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
-//ADD INCLUDE"S HERE
+// ADD INCLUDE"S HERE
 #include "Tank.h"
-
+// ABOVE HERE
 #include "TankPlayerController.generated.h"
 
 /**
