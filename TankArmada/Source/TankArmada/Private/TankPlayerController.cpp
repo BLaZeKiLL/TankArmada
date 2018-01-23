@@ -35,6 +35,7 @@ ATank * ATankPlayerController::GetControlledTank() const
 	return Cast<ATank>(GetPawn());
 }
 
+
 void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
@@ -43,7 +44,7 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("HitLocation : %s"), *(HitLocation.ToString()));
+		//UE_LOG(LogTemp, Warning, TEXT("Look Direction : %s"), *(HitLocation.ToString()));
 
 		// #TODO Move barrel
 	}
@@ -55,13 +56,23 @@ void ATankPlayerController::AimTowardsCrosshair()
 // Will ray trace
 bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
-	OutHitLocation = FVector(1.0);
-	return true;
+	int32 ViewportSizeX, ViewportSizeY;
+	
+	GetViewportSize(ViewportSizeX, ViewportSizeY);
 
+	FVector2D ScreenLocation = FVector2D((ViewportSizeX*CrossHairXLocation), (ViewportSizeY*CrosshairYLocation));
+	UE_LOG(LogTemp, Warning, TEXT("Screen location : %s"), *(ScreenLocation.ToString()));
+
+	// find cross-hair position
+	// de-project the location
+	// line trace through the position
 	// if hits terrain
 		// update HitLocation
 		//return true
 	// else return false
+	
+	
+	return true;
 }
 
 
