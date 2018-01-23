@@ -11,6 +11,7 @@ ATank::ATank()
 
 }
 
+
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
@@ -32,3 +33,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void ATank::AimAt(FVector HitLocation)
+{
+	UE_LOG(LogTemp, Warning, TEXT("%s Aiming At %s"), *GetName(), *(HitLocation.ToString()));
+}

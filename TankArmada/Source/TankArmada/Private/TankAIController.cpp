@@ -5,6 +5,8 @@
 
 void ATankAIController::BeginPlay()
 {
+	Super::BeginPlay(); // sets tick = true
+
 	ATank* PossessedTank = GetControlledTank();
 	ATank* PlayerTank = GetPlayerTank();
 
@@ -20,6 +22,13 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+}
 
 ATank * ATankAIController::GetControlledTank() const
 {
