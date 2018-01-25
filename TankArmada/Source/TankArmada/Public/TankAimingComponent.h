@@ -9,7 +9,10 @@
 // ABOVE
 #include "TankAimingComponent.generated.h"
 
+// Froward Declaration
+class UTankBarrel; 
 
+// Holds barrel's Properties
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKARMADA_API UTankAimingComponent : public UActorComponent
 {
@@ -21,13 +24,13 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	// #TODO SetTurretReference()
 
 private:
 
-	UStaticMeshComponent * Barrel = nullptr;
+	UTankBarrel * Barrel = nullptr;
 	
 	void MoveBarrelTowards(FVector AimDirection);
 };
