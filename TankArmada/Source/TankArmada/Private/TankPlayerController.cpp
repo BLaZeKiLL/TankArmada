@@ -8,16 +8,6 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-
-	auto ControlledTank = GetControlledTank();
-	if (!ControlledTank) //Pointer Protection
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("Tank Player Controller NULLPTR !!"));
-	}
-	else
-	{
-		//UE_LOG(LogTemp, Warning, TEXT("Tank Player Controller Possessing : %s"), *(ControlledTank->GetName)());
-	}
 }
 
 
@@ -25,6 +15,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/// Always aim a Cross-hair
 	AimTowardsCrosshair();
 }
 
@@ -39,16 +30,15 @@ void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
-	FVector HitLocation; // OUT
+	FVector OutHitLocation; // OUT
 
-	if (GetSightRayHitLocation(HitLocation))
+	// If hit a valid Object (Ray-Cast)
+	if (GetSightRayHitLocation(OutHitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
-
-		// #TODO Move barrel
+		// Aim at it
+		GetControlledTank()->AimAt(OutHitLocation);
 	}
 
-	
 }
 
 
@@ -77,6 +67,9 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 		return true;
 	}
 	
+	/// Will never be reached as either we his something and Aim at it 
+	/// Or we hit nothing and reset the Barrel
+	// Still there for imaginary cases
 	return false;
 }
 
@@ -100,9 +93,10 @@ bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector &
 bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVector& OutHitLocation) const
 {
 	FHitResult OutHitResult; // OUT param
-	auto StartLocation = PlayerCameraManager->GetCameraLocation(); // START
-	auto EndLocation = StartLocation + (LookDirection * ShootRange); // END
+	auto StartLocation = PlayerCameraManager->GetCameraLocation(); // START of the Ray-Cast
+	auto EndLocation = StartLocation + (LookDirection * ShootRange); // END of the Ray-Cast
 
+	/// Ray-Cast
 	if (GetWorld()->LineTraceSingleByChannel(
 		OutHitResult,
 		StartLocation,
@@ -115,7 +109,8 @@ bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection,FVect
 		return true;
 	}
 
-	// Hit nothing
+	// Hit nothing e.g SKY
+	/// Because of this 0 Vector , New Pitch Becomes 0 and Barrel Resets Itself
 	OutHitLocation = FVector(0);
 	return false;
 }

@@ -22,7 +22,8 @@ public:
 	ATank();
 
 	void AimAt(FVector HitLocation);
-
+	 
+	/// SOFT REFRENCING the Barrel Asset Contained in a Component Class
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 
@@ -39,6 +40,7 @@ public:
 
 private:
 
+	// Speed At which Projectile is launched used in calculating the path solution
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 100000.0f; // #TODO Find Sensible Default
 		

@@ -10,17 +10,6 @@ void ATankAIController::BeginPlay()
 
 	ATank* PossessedTank = GetControlledTank();
 	ATank* PlayerTank = GetPlayerTank();
-
-	if (!PlayerTank)
-	{
-		// UE_LOG(LogTemp, Warning, TEXT("Error : AI failed to posses ! OR"));
-		UE_LOG(LogTemp, Warning, TEXT("Error : Player Not found !"));
-	}
-	else
-	{
-		// UE_LOG(LogTemp, Warning, TEXT("Tank AI Controller Possessing : %s"), *(PossessedTank->GetName()));
-		UE_LOG(LogTemp, Warning, TEXT("Tank looking at : %s"), *(PlayerTank->GetName()));
-	}
 }
 
 
@@ -28,15 +17,17 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/// Always Aim at the Player
 	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
 }
 
+// Self Tank GETTER
 ATank * ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
 }
 
-
+// Player Tank GETTER
 ATank * ATankAIController::GetPlayerTank() const
 {
 	/// Failed cast returns a nullptr 

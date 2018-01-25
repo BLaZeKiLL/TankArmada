@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
+
+#include "Engine/World.h"
+
 #include "TankBarrel.generated.h"
 
 /**
@@ -22,12 +25,15 @@ public:
 	
 private:
 	
+	// Rate of change of angle
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 20.0f; 
+		float MaxDegreesPerSecond = 5.0f; 
 
+	// Max Barrel Elevation
 	UPROPERTY(EditAnywhere, Category = Setup)
 		float MaxElevation = 40.0f;
 
+	// Min Barrel Elevation
 	UPROPERTY(EditAnywhere, Category = Setup)
 		float MinElevation = 0.0f;
 	

@@ -22,8 +22,8 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("FiringHole"));
 
-	// calculate
-
+	/// calculate whether it is possible to shoot the projectile with given speed
+	/// parabolic path 2-D projectile motion
 	bool bAimSolution = UGameplayStatics::SuggestProjectileVelocity(
 		this,
 		OutLaunchVelocity,
@@ -36,7 +36,9 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		ESuggestProjVelocityTraceOption::DoNotTrace
 	);
 
-	if (bAimSolution && HitLocation != FVector(0))
+	/// We remove hit location from IF as when we collide with the sky we get solution with hit location 0,0,0 
+	/// so pitch becomes 0 and turret resets itself
+	if (bAimSolution /*&& HitLocation != FVector(0)*/) 
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		
@@ -60,12 +62,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	//UE_LOG(LogTemp, Warning, TEXT("%s AimAsRotator : %s"), *GetOwner()->GetName(), *DeltaRotator.ToString());
-
-	Barrel->Elevate(5);
+	/// The new angle for the barrel
+	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
-
+// Barrel SETTER
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;

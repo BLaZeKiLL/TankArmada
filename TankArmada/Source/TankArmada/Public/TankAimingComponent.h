@@ -23,6 +23,7 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	//Delegate Aiming
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
@@ -31,6 +32,7 @@ public:
 
 private:
 
+	// Barrel of the tank
 	UTankBarrel * Barrel = nullptr;
 	
 	void MoveBarrelTowards(FVector AimDirection);
