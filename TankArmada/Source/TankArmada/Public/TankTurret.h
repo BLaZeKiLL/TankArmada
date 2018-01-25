@@ -4,17 +4,25 @@
 
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
+
+#include "Engine/World.h"
+
 #include "TankTurret.generated.h"
 
 /**
  * 
  */
-UCLASS()
+UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TANKARMADA_API UTankTurret : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
+public:
+
+	void Rotate(float RelativeSpeed);
 	
-	
+	// Rate of change of angle
+	UPROPERTY(EditAnywhere, Category = Setup)
+		float MaxDegreesPerSecond = 5.0f;
 	
 };

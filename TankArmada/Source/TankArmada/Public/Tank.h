@@ -9,7 +9,9 @@
 // ABOVE HERE
 #include "Tank.generated.h"
 
-class UTankBarrel; // Froward Declaration
+// Froward Declaration
+class UTankBarrel;
+class UTankTurret;
 class UTankAimingComponent;
 
 UCLASS()
@@ -25,7 +27,10 @@ public:
 	 
 	/// SOFT REFRENCING the Barrel Asset Contained in a Component Class
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+		void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+		void SetTurretReference(UTankTurret* TurretToSet);
 
 protected:
 	// Called when the game starts or when spawned
