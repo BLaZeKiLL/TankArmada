@@ -1,7 +1,7 @@
 // Property of D4L4L
 
-#include "Tank.h"
 #include "TankAIController.h"
+#include "Tank.h"
 
 
 void ATankAIController::BeginPlay()

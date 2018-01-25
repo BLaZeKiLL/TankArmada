@@ -1,9 +1,8 @@
 // Property of D4L4L
 
+#include "Tank.h"
 #include "TankAimingComponent.h"
 #include "TankBarrel.h"
-#include "Tank.h"
-
 
 // Sets default values
 ATank::ATank()
