@@ -39,7 +39,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 	/// We remove hit location from IF as when we collide with the sky we get solution with hit location 0,0,0 
 	/// so pitch becomes 0 and turret resets itself
-	if (bAimSolution /*&& HitLocation != FVector(0)*/) 
+	if (bAimSolution && HitLocation != FVector(0)) 
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		
@@ -65,17 +65,23 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	/// The new angle for the barrel
 	Barrel->Elevate(DeltaRotator.Pitch);
+	if (FMath::Abs(DeltaRotator.Yaw) > 180.F)
+	{
+		DeltaRotator.Yaw *= -1.F;
+	}
 	Turret->Rotate(DeltaRotator.Yaw);
 }
 
 // Barrel SETTER
 void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
 }
 
 // Turret SETTER
 void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 {
+	if (!TurretToSet) { return; }
 	Turret = TurretToSet;
 }
