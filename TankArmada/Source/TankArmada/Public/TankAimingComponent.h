@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 // ADD INCLUDES BELOW
 #include "Kismet/GameplayStatics.h"
+#include "Engine/World.h"
 // ABOVE
 #include "TankAimingComponent.generated.h"
 

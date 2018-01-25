@@ -17,17 +17,18 @@ class TANKARMADA_API UTankBarrel : public UStaticMeshComponent
 	
 public:
 
-	void Elevate(float DegreesPerSecond);
+	// -1 max down speed, +1 max up speed
+	void Elevate(float RelativeSpeed);
 	
 private:
 	
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 20; 
+		float MaxDegreesPerSecond = 20.0f; 
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxElevation = 40;
+		float MaxElevation = 40.0f;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MinElevation = 0;
+		float MinElevation = 0.0f;
 	
 };

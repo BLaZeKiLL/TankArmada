@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 // ADD INCLUDE"S HERE
-#include "Tank.h"
+
 #include "Engine/World.h"
 // ABOVE HERE
 #include "TankPlayerController.generated.h"
+
+class ATank;
 
 /**
  * 
@@ -39,11 +41,11 @@ private:
 	bool GetLookVectorHitLocation(FVector LookDirection,FVector& OutHitLocation) const;
 
 	UPROPERTY(EditAnywhere)
-		float CrossHairXLocation = 0.5;
+		float CrossHairXLocation = 0.5f;
 
 	UPROPERTY(EditAnywhere)
-		float CrosshairYLocation = 0.3333;
+		float CrosshairYLocation = 0.3333f;
 
 	UPROPERTY(EditAnywhere)
-		float ShootRange = 1000000.0;
+		float ShootRange = 1000000.0f;
 };

@@ -5,10 +5,12 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 // ADD INCLUDES BELOW
-#include "Tank.h"
+
 #include "Engine/World.h"
 // ABOVE HERE
 #include "TankAIController.generated.h"
+
+class ATank;
 
 /**
  * 

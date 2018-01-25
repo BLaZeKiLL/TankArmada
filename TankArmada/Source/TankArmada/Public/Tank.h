@@ -5,12 +5,12 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 // ADD INCLUDES BELOW
-#include "TankAimingComponent.h"
+
 // ABOVE HERE
 #include "Tank.generated.h"
 
 class UTankBarrel; // Froward Declaration
-
+class UTankAimingComponent;
 
 UCLASS()
 class TANKARMADA_API ATank : public APawn
@@ -33,8 +33,6 @@ protected:
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -42,6 +40,6 @@ public:
 private:
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-		float LaunchSpeed = 100000; // #TODO Find Sensible Default
+		float LaunchSpeed = 100000.0f; // #TODO Find Sensible Default
 		
 };
