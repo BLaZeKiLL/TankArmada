@@ -71,8 +71,5 @@ void ATank::Fire()
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastFireTime = FPlatformTime::Seconds();
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Projectile Blueprint Missing"));
-	}
+
 }
