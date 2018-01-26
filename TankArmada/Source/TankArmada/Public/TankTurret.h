@@ -23,6 +23,6 @@ public:
 	
 	// Rate of change of angle
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 5.0f;
+		float MaxDegreesPerSecond = 25.0f;
 	
 };

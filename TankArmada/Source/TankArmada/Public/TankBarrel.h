@@ -27,7 +27,7 @@ private:
 	
 	// Rate of change of angle
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 5.0f; 
+		float MaxDegreesPerSecond = 10.0f; 
 
 	// Max Barrel Elevation
 	UPROPERTY(EditAnywhere, Category = Setup)
