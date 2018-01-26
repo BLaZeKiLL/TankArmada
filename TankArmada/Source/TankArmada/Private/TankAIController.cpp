@@ -7,9 +7,6 @@
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay(); // sets tick = true
-
-	ATank* PossessedTank = GetControlledTank();
-	ATank* PlayerTank = GetPlayerTank();
 }
 
 
@@ -17,19 +14,16 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	/// Always Aim at the Player
-	GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+	ATank* PossessedTank = Cast<ATank>(GetPawn());
+	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	if (PlayerTank && PossessedTank) // Pointer Protection
+	{
+		/// Always Aim at the Player
+		PossessedTank->AimAt(PlayerTank->GetActorLocation());
+		/// Then Blast That MOTHERFUCKAAA
+		PossessedTank->Fire(); 
+	}
+
 }
 
-// Self Tank GETTER
-ATank * ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-// Player Tank GETTER
-ATank * ATankAIController::GetPlayerTank() const
-{
-	/// Failed cast returns a nullptr 
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-}

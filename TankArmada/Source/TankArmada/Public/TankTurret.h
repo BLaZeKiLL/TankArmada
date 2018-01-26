@@ -22,7 +22,7 @@ public:
 	void Rotate(float RelativeSpeed);
 	
 	// Rate of change of angle
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MaxDegreesPerSecond = 25.0f;
 	
 };

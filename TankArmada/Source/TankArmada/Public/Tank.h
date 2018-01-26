@@ -51,12 +51,17 @@ public:
 private:
 
 	// Speed At which Projectile is launched used in calculating the path solution
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float LaunchSpeed = 4000.0f; 
 		
-	UPROPERTY(EditAnywhere, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		TSubclassOf<ATankProjectile> ProjectileBlueprint;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float ReloadTimeInSeconds = 3.0f;
 
 	// local barrel for Spawning Projectile
 	UTankBarrel* Barrel = nullptr;
+
+	double LastFireTime = 0;
 };

@@ -44,14 +44,14 @@ private:
 	bool GetLookVectorHitLocation(FVector LookDirection,FVector& OutHitLocation) const;
 
 	/// UI X-factor
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float CrossHairXLocation = 0.5f;
 
 	/// UI Y-factor
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float CrosshairYLocation = 0.3333f;
 
 	// Max Shooting Range
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 		float ShootRange = 1000000.0f;
 };
