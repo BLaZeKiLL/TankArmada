@@ -14,6 +14,8 @@ ATank::ATank()
 
 	// No need to protect pointer as it is in constructor
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+
+
 }
 
 
@@ -55,15 +57,13 @@ void ATank::SetTurretReference(UTankTurret* TurretToSet)
 
 void ATank::Fire()
 {
-	auto Time = GetWorld()->GetTimeSeconds();
-
-	UE_LOG(LogTemp, Warning, TEXT("%f : Firing"), Time);
-
 	if (!Barrel) { return; }
 
-	GetWorld()->SpawnActor<ATankProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<ATankProjectile>(
 		ProjectileBlueprint,
 		Barrel->GetSocketLocation(FName("FiringHole")),
 		Barrel->GetSocketRotation(FName("FiringHole"))
 		);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
