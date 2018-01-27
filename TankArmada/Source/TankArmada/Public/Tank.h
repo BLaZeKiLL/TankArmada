@@ -15,6 +15,7 @@ class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
 class ATankProjectile;
+class UTankMovementComponent;
 
 UCLASS()
 class TANKARMADA_API ATank : public APawn
@@ -34,7 +35,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* TurretToSet);
 
-	UFUNCTION(BlueprintCallable, Category = Setup)
+	UFUNCTION(BlueprintCallable, Category = Firing)
 		void Fire();
 
 protected:
@@ -53,7 +54,8 @@ private:
 	// Speed At which Projectile is launched used in calculating the path solution
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float LaunchSpeed = 4000.0f; 
-		
+	
+	/// ANY CHANGES TO THE CLASS CAUSE THIS TO RESET IN THE BLUEPRINT
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		TSubclassOf<ATankProjectile> ProjectileBlueprint;
 

@@ -15,7 +15,7 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	/// Always aim a Cross-hair
+	/// Always aim at the Cross-hair
 	AimTowardsCrosshair();
 }
 

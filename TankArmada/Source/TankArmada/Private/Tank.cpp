@@ -5,6 +5,8 @@
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "TankProjectile.h"
+#include "TankMovementComponent.h"
+
 
 // Sets default values
 ATank::ATank()
@@ -14,7 +16,6 @@ ATank::ATank()
 
 	// No need to protect pointer as it is in constructor
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-
 
 }
 
@@ -34,6 +35,7 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+
 // Delegates Aiming to TankAimingComponent with a LaunchSpeed
 void ATank::AimAt(FVector HitLocation)
 {
@@ -47,6 +49,7 @@ void ATank::SetBarrelReference(UTankBarrel* BarrelToSet)
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
 	Barrel = BarrelToSet;
 }
+
 
 // Turret SETTER
 void ATank::SetTurretReference(UTankTurret* TurretToSet)
