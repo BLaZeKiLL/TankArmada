@@ -19,6 +19,12 @@ void ATankAIController::Tick(float DeltaTime)
 
 	if (PlayerTank && PossessedTank) // Pointer Protection
 	{
+		MoveToActor(
+			PlayerTank,
+			AcceptanceRadius 
+			);
+
+
 		/// Always Aim at the Player
 		PossessedTank->AimAt(PlayerTank->GetActorLocation());
 		/// Then Blast That MOTHERFUCKAAA

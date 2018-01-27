@@ -15,13 +15,8 @@ void UTankMovementComponent::IntendMoveFoward(float Throw)
 {
 	if (!LeftTrack || !RightTrack) { return; }
 
-	//auto Time = GetWorld()->GetTimeSeconds();
-	UE_LOG(LogTemp, Warning, TEXT("Intend Move Foward = %f"), Throw);
-
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(Throw);
-
-	// #TODO Prevent Double Speed
 }
 
 
@@ -31,4 +26,16 @@ void UTankMovementComponent::IntendTurnRight(float Throw)
 
 	LeftTrack->SetThrottle(Throw);
 	RightTrack->SetThrottle(-Throw);
+}
+
+
+void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed)
+{
+	auto TankFoward = GetOwner()->GetActorForwardVector().GetSafeNormal();
+	auto AIFowardIntention = MoveVelocity.GetSafeNormal();
+
+	/// since both are unit vectors they have a magnitude of 1
+	/// so A.B give us cos(theta) i.e cos of the angle between them which is the throttle magnitude
+	IntendMoveFoward(FVector::DotProduct(AIFowardIntention ,TankFoward));
+	IntendTurnRight((FVector::CrossProduct(TankFoward, AIFowardIntention)).Z);
 }
