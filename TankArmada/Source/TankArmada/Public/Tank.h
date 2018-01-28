@@ -28,10 +28,11 @@ public:
 
 	void AimAt(FVector HitLocation);
 	 
-	/// SOFT REFRENCING the Barrel Asset Contained in a Component Class
+	// SETTER for the Barrel
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetBarrelReference(UTankBarrel* BarrelToSet);
 
+	// SETTER for the Turret
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret* TurretToSet);
 

@@ -52,6 +52,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	/// Screen Location of the cross-hair
 	FVector2D ScreenLocation = FVector2D((ViewportSizeX*CrossHairXLocation), (ViewportSizeY*CrosshairYLocation));
 
+	/// Cross-Hair Direction
 	FVector LookDirection;
 
 	/// Unit-Vector in the direction we are looking

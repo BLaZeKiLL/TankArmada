@@ -19,6 +19,7 @@ class TANKARMADA_API UTankMovementComponent : public UNavMovementComponent
 	
 public:
 
+	// SETTER for Tank Tracks
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialize(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 	
