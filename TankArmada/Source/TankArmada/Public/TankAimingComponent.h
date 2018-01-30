@@ -14,6 +14,16 @@
 class UTankBarrel;
 class UTankTurret;
 
+
+UENUM()
+enum class EFiringStatus : uint8
+{
+	Aiming,
+	Reloading,
+	Locked
+};
+
+
 // Holds barrel's Properties
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKARMADA_API UTankAimingComponent : public UActorComponent
@@ -27,9 +37,13 @@ public:
 	//Delegate Aiming
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
+protected:
 
-	void SetTurretReference(UTankTurret* TurretToSet);
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+		EFiringStatus FiringStatus = EFiringStatus::Reloading;
+
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:
 
@@ -40,4 +54,6 @@ private:
 	UTankTurret * Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+
+	
 };

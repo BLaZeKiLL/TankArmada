@@ -28,39 +28,31 @@ public:
 
 	void AimAt(FVector HitLocation);
 	 
-	// SETTER for the Barrel
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel* BarrelToSet);
 
-	// SETTER for the Turret
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Firing)
+	UFUNCTION(BlueprintCallable, Category = "Firing")
 		void Fire();
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-	UTankAimingComponent* TankAimingComponent = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+		UTankAimingComponent* TankAimingComponent = nullptr;
 
-public:	
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+		UTankMovementComponent* TankMovementComponent = nullptr;
 
 private:
 
 	// Speed At which Projectile is launched used in calculating the path solution
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000.0f; 
 	
 	/// ANY CHANGES TO THE CLASS CAUSE THIS TO RESET IN THE BLUEPRINT
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		TSubclassOf<ATankProjectile> ProjectileBlueprint;
 
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTimeInSeconds = 3.0f;
 
 	// local barrel for Spawning Projectile
