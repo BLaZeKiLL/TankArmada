@@ -14,20 +14,24 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
+	UE_LOG(LogTemp, Warning, TEXT("GOKU :%s Tank Counstructed !"), *GetName());
 }
 
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
-	Super::BeginPlay();
+	Super::BeginPlay(); // NEEDE FOR BLUEPRINT BEGIN PLAY TO WORK
 	
+	UE_LOG(LogTemp, Warning, TEXT("GOKU : %s Tank Begin Play !"), *GetName());
 }
 
 
 // Delegates Aiming to TankAimingComponent with a LaunchSpeed
 void ATank::AimAt(FVector HitLocation)
 {
+	if (!TankAimingComponent) { return; }
+
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 

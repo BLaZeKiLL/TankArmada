@@ -40,7 +40,7 @@ public:
 protected:
 
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
-		EFiringStatus FiringStatus = EFiringStatus::Reloading;
+		EFiringStatus FiringStatus = EFiringStatus::Locked;
 
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
