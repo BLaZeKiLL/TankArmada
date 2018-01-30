@@ -1,6 +1,7 @@
 // Property of D4L4L
 
 #include "TankPlayerController.h"
+#include "TankAimingComponent.h"
 #include "Tank.h"
 
 
@@ -8,6 +9,15 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
+	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+	if (AimingComponent)
+	{
+		FoundAimingComponent(AimingComponent);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("%s : Aiming Component Not Found !"), *GetName());
+	}
 }
 
 
