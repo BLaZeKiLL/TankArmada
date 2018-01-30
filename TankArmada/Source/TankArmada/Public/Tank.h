@@ -56,7 +56,7 @@ private:
 		float ReloadTimeInSeconds = 3.0f;
 
 	// local barrel for Spawning Projectile
-	UTankBarrel* Barrel = nullptr;
+	UTankBarrel* Barrel = nullptr; // #TODO Remove
 
 	double LastFireTime = 0;
 };
