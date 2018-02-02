@@ -17,7 +17,7 @@ void ATankAIController::Tick(float DeltaTime)
 	ATank* PossessedTank = Cast<ATank>(GetPawn());
 	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 
-	if (PlayerTank && PossessedTank) // Pointer Protection
+	if (!ensure(PlayerTank && PossessedTank)) // Pointer Protection
 	{
 		MoveToActor(
 			PlayerTank,
