@@ -33,6 +33,8 @@ void UTankMovementComponent::RequestDirectMove(const FVector& MoveVelocity, bool
 {
 	auto TankFoward = GetOwner()->GetActorForwardVector().GetSafeNormal();
 	auto AIFowardIntention = MoveVelocity.GetSafeNormal();
+	
+	
 
 	/// since both are unit vectors they have a magnitude of 1
 	/// so A.B give us cos(theta) i.e cos of the angle between them which is the throttle magnitude
