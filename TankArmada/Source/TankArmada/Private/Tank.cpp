@@ -21,6 +21,7 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // NEEDE FOR BLUEPRINT BEGIN PLAY TO WORK
 	
+	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
 
