@@ -35,7 +35,7 @@ public:
 	UTankAimingComponent();
 
 	//Delegate Aiming
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 protected:
 
@@ -46,6 +46,9 @@ protected:
 		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 4000.0f;
 
 	// Barrel of the tank
 	UTankBarrel * Barrel = nullptr;

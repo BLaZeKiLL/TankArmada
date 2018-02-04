@@ -1,7 +1,6 @@
 // Property of D4L4L
 
 #include "Tank.h"
-#include "TankAimingComponent.h"
 #include "TankBarrel.h"
 #include "TankTurret.h"
 #include "TankProjectile.h"
@@ -21,16 +20,6 @@ void ATank::BeginPlay()
 {
 	Super::BeginPlay(); // NEEDE FOR BLUEPRINT BEGIN PLAY TO WORK
 	
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
-}
-
-
-// Delegates Aiming to TankAimingComponent with a LaunchSpeed
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
 

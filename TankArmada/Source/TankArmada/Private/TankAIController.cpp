@@ -1,7 +1,7 @@
 // Property of D4L4L
 
 #include "TankAIController.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 
 // Dependant on Movement Component through path finding
 
@@ -14,29 +14,24 @@ void ATankAIController::BeginPlay()
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-	ATank* PossessedTank = Cast<ATank>(GetPawn());
-	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	
+	//APawn* PossessedTank = (GetPawn());
+	auto PlayerTank = (GetWorld()->GetFirstPlayerController()->GetPawn());
+	auto ControlledTank = GetPawn();
+	auto AimingComponent = ControlledTank->FindComponentByClass<UTankAimingComponent>();
 
 	/// DOUBLE CHECK ensure() MACRO
-	if (!ensure(PlayerTank && PossessedTank))
-	{
-		return; // Pointer Protection
-	}
-	else
-	{
-		/// Movement Component Dependency
-		MoveToActor(
-			PlayerTank,
-			AcceptanceRadius 
-			);
-
-
-		/// Always Aim at the Player
-		PossessedTank->AimAt(PlayerTank->GetActorLocation());
-		/// Then Blast That MOTHERFUCKAAA
-		PossessedTank->Fire(); 
-	}
-
+	if (!ensure(PlayerTank && ControlledTank && AimingComponent)) { return; }
+	
+	/// Movement Component Dependency
+	MoveToActor(
+		PlayerTank,
+		AcceptanceRadius 
+		);
+		
+	/// Always Aim at the Player
+	AimingComponent->AimAt(PlayerTank->GetActorLocation());
+	
+	// #TODO Add fire() back
 }
 

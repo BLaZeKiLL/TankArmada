@@ -10,10 +10,11 @@
 // ABOVE HERE
 #include "TankAIController.generated.h"
 
-class ATank;
+class UTankAimingComponent;
 
 /**
- * 
+ * AI Controller for the tank
+ * CHECK THIS IS SELECTED AS THE AI CONTROLLER IN TANK BP
  */
 UCLASS()
 class TANKARMADA_API ATankAIController : public AAIController
