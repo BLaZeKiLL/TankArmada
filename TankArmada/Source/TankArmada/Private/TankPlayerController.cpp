@@ -18,6 +18,11 @@ void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	/// Tick fires in PlayerController BP in Editor
+	/// https://issues.unrealengine.com/issue/UE-36929
+	/// therefore a protection here is needed
+	if (!GetPawn()) { return; }
+
 	/// Always aim at the Cross-hair
 	AimTowardsCrosshair();
 }
