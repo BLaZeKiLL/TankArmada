@@ -13,7 +13,7 @@
 // Froward Declaration
 class UTankBarrel;
 class UTankTurret;
-
+class ATankProjectile;
 
 UENUM()
 enum class EFiringStatus : uint8
@@ -37,18 +37,33 @@ public:
 	//Delegate Aiming
 	void AimAt(FVector HitLocation);
 
+	// Fire the projectile 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+		void Fire();
+
 protected:
 
+	// Status for the UI
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
 		EFiringStatus FiringStatus = EFiringStatus::Locked;
 
+	// SETTER
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
 private:
 
+	// Launch Speed of the projectile
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000.0f;
+
+	// Projectile Blueprint Reference
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		TSubclassOf<ATankProjectile> ProjectileBlueprint;
+
+	// Reload Time
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float ReloadTimeInSeconds = 3.0f;
 
 	// Barrel of the tank
 	UTankBarrel * Barrel = nullptr;
@@ -58,5 +73,5 @@ private:
 
 	void MoveBarrelTowards(FVector AimDirection);
 
-	
+	double LastFireTime = 0;
 };
