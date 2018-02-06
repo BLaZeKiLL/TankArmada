@@ -18,8 +18,11 @@ class ATankProjectile;
 UENUM()
 enum class EFiringStatus : uint8
 {
+	// YELLOW
 	Aiming,
+	// RED
 	Reloading,
+	// GREEN
 	Locked
 };
 
@@ -41,11 +44,17 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 		void Fire();
 
+	// Tick
+	void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	// BeginPlay
+	void BeginPlay() override;
+
 protected:
 
 	// Status for the UI
 	UPROPERTY(BlueprintReadOnly, Category = "Setup")
-		EFiringStatus FiringStatus = EFiringStatus::Locked;
+		EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 	// SETTER
 	UFUNCTION(BlueprintCallable, Category = "Setup")
@@ -71,7 +80,15 @@ private:
 	// Turret of the tank
 	UTankTurret * Turret = nullptr;
 
+	// UI true = yellow
+	bool IsBarrelMoving();
+
+	// Aiming : Barrel Movement
 	void MoveBarrelTowards(FVector AimDirection);
 
+	// UI : compared with reload time for firing status
 	double LastFireTime = 0;
+
+	// UI : compared with current barrel direction to check for movement
+	FVector AimDirection;
 };
