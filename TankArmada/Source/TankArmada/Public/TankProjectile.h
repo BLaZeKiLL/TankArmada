@@ -7,6 +7,8 @@
 
 #include "Engine/World.h"
 #include "GameFramework/ProjectileMovementComponent.h"
+#include "Particles/ParticleSystemComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 #include "TankProjectile.generated.h"
 
@@ -31,6 +33,12 @@ public:
 
 private:
 
-	UProjectileMovementComponent * ProjectileMovementComponent = nullptr;
-	
+	//UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UStaticMeshComponent* CollisonMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Setup")
+		UParticleSystemComponent* LaunchBlast = nullptr;
 };
