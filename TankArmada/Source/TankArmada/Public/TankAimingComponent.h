@@ -23,7 +23,9 @@ enum class EFiringStatus : uint8
 	// RED
 	Reloading,
 	// GREEN
-	Locked
+	Locked,
+	// GREY
+	OutOfAmmo
 };
 
 
@@ -55,13 +57,15 @@ public:
 protected:
 
 	// Status for the UI
-	UPROPERTY(BlueprintReadOnly, Category = "Setup")
+	UPROPERTY(BlueprintReadOnly, Category = "Firing")
 		EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 	// SETTER
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 		void Initialize(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+		int32 GetAmmo() const;
 private:
 
 	// Launch Speed of the projectile
@@ -75,6 +79,10 @@ private:
 	// Reload Time
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTimeInSeconds = 3.0f;
+
+	// Initial Ammo
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		int32 Ammo = 3;
 
 	// Barrel of the tank
 	UTankBarrel * Barrel = nullptr;
