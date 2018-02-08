@@ -50,6 +50,8 @@ public:
 	// BeginPlay
 	void BeginPlay() override;
 
+	EFiringStatus GetFiringStatus() const;
+
 protected:
 
 	// Status for the UI

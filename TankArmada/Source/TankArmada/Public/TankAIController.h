@@ -31,5 +31,6 @@ public:
 private:
 
 	// How Close Can The AI Tank Come
-	float AcceptanceRadius = 3000.0f; // Check Radius In cm
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float AcceptanceRadius = 30.0f; // Check Radius In cm
 };

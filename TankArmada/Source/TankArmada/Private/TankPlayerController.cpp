@@ -61,14 +61,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) cons
 	/// Unit-Vector in the direction we are looking
 	if (GetLookDirection(ScreenLocation,LookDirection))
 	{
-		if (GetLookVectorHitLocation(LookDirection,OutHitLocation))
-		{
-			// Something is Hit
-			return true;
-		}
-
-		// if nothing hit 0,0,0 is the HitLocation EG. sky
-		return true;
+		return GetLookVectorHitLocation(LookDirection, OutHitLocation);
 	}
 	
 	/// Will never be reached as either we his something and Aim at it 
