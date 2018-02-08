@@ -20,6 +20,10 @@ class TANKARMADA_API UTankTrack : public UStaticMeshComponent
 	
 public:
 
+	UTankTrack();
+
+	virtual void BeginPlay() override;
+
 	// Set Throttle Between -1 and +1
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void SetThrottle(float Throttle);
@@ -27,4 +31,14 @@ public:
 	// Max Force Per Track In Newtons
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float TrackMaxDrivingForce = 40000000.0f; // this is 400,000 N of force unit of measurement in UE is cm
+
+private:
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void ApplySideWaysForce();
+
+	void DriveTrack();
+
+	float CurrentThrottle = 0.0f;
 };
