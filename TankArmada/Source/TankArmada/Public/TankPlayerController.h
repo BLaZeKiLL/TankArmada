@@ -26,12 +26,16 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 
 private:
+	UFUNCTION()
+		virtual void StartSpectatingOnly() override;
 
 	// Start the tank moving the barrel so the shot would hit where
 	// cross hair intersects the world

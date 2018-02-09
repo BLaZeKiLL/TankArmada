@@ -10,6 +10,8 @@
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Engine/World.h"
+#include "Kismet/GameplayStatics.h "
 
 #include "TankProjectile.generated.h"
 
@@ -37,6 +39,8 @@ private:
 	UFUNCTION()
 		void OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit);
 
+	void OnTimerExpire();
+
 	//UPROPERTY(VisibleAnywhere, Category = "Setup")
 		UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 
@@ -51,4 +55,10 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 		URadialForceComponent* ImpactForce = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float DestroyDelay = 10.0f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+		float ProjectileDamage = 20.0f;
 };

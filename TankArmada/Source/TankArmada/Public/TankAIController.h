@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "AIController.h"
 // ADD INCLUDES BELOW
-
 #include "Engine/World.h"
 // ABOVE HERE
 #include "TankAIController.generated.h"
@@ -27,8 +26,13 @@ public:
 	
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void SetPawn(APawn* InPawn) override;
 
 private:
+
+	UFUNCTION()
+		void OnPossessedTankDeath();
+
 
 	// How Close Can The AI Tank Come
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")

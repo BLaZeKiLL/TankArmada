@@ -58,4 +58,31 @@ void ATankProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherAc
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
 	ImpactForce->FireImpulse();
+
+	SetRootComponent(ImpactBlast);
+	CollisonMesh->DestroyComponent();
+	
+	UGameplayStatics::ApplyRadialDamage(
+		this,
+		ProjectileDamage,
+		GetActorLocation(),
+		ImpactForce->Radius, // same radius
+		UDamageType::StaticClass(),
+		TArray<AActor*>() // damage all
+	);
+
+	FTimerHandle Timer;
+	GetWorld()->GetTimerManager().SetTimer(
+		Timer,
+		this,
+		&ATankProjectile::OnTimerExpire,
+		DestroyDelay,
+		false
+	);
+}
+
+
+void ATankProjectile::OnTimerExpire()
+{
+	Destroy();
 }
