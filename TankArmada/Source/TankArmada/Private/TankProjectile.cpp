@@ -23,6 +23,9 @@ ATankProjectile::ATankProjectile()
 	ImpactBlast = CreateDefaultSubobject<UParticleSystemComponent>(FName("Impact Blast"));
 	ImpactBlast->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 	ImpactBlast->bAutoActivate = false;
+
+	ImpactForce = CreateDefaultSubobject<URadialForceComponent>(FName("Impact Force"));
+	ImpactForce->AttachToComponent(RootComponent, FAttachmentTransformRules::KeepRelativeTransform);
 }
 
 // Called when the game starts or when spawned
@@ -54,4 +57,5 @@ void ATankProjectile::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherAc
 {
 	LaunchBlast->Deactivate();
 	ImpactBlast->Activate();
+	ImpactForce->FireImpulse();
 }

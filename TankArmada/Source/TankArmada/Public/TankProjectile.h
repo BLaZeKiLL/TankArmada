@@ -9,6 +9,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Components/StaticMeshComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
 
 #include "TankProjectile.generated.h"
 
@@ -39,12 +40,15 @@ private:
 	//UPROPERTY(VisibleAnywhere, Category = "Setup")
 		UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UStaticMeshComponent* CollisonMesh = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UParticleSystemComponent* LaunchBlast = nullptr;
 
-	UPROPERTY(VisibleAnywhere, Category = "Setup")
+	UPROPERTY(VisibleAnywhere, Category = "Components")
 		UParticleSystemComponent* ImpactBlast = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		URadialForceComponent* ImpactForce = nullptr;
 };
