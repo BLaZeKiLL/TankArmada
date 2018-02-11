@@ -30,6 +30,7 @@ public:
 
 protected:
 
+	// event that is implemented in the TankPlayerControllerBP
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 		void FoundAimingComponent(UTankAimingComponent* AimingCompRef);
 

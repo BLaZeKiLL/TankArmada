@@ -26,6 +26,9 @@ public:
 	UFUNCTION(BlueprintPure, Category = "UI Health")
 		float GetPercentHealth();
 
+	UFUNCTION(BlueprintCallable, Category = "CHEATS")
+		void RestoreHealth();
+
 	FTankDelegate OnDeath;
 
 protected:
