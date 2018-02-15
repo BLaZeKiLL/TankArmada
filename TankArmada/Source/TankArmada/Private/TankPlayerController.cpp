@@ -130,6 +130,4 @@ void ATankPlayerController::SetPawn(APawn* InPawn)
 void ATankPlayerController::StartSpectatingOnly()
 {
 	Super::StartSpectatingOnly();
-
-	UE_LOG(LogTemp, Warning, TEXT("Player recived"));
 }

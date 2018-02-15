@@ -26,6 +26,8 @@ public:
 	
 	virtual void Tick(float DeltaTime) override;
 
+	void MoveTowardsPlayer(APawn * PlayerTank, float DynamicAcceptanceRadius);
+
 	virtual void SetPawn(APawn* InPawn) override;
 
 private:
@@ -33,8 +35,9 @@ private:
 	UFUNCTION()
 		void OnPossessedTankDeath();
 
-
 	// How Close Can The AI Tank Come
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
-	float AcceptanceRadius = 30.0f; // Check Radius In cm
+	float AcceptanceRadius = 7500.0f; // Check Radius In cm
+
+	bool PlayerInSight();
 };
