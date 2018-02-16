@@ -26,6 +26,7 @@ public:
 	
 	virtual void Tick(float DeltaTime) override;
 
+	// Nav-Mesh Movement
 	void MoveTowardsPlayer(APawn * PlayerTank, float DynamicAcceptanceRadius);
 
 	virtual void SetPawn(APawn* InPawn) override;
@@ -39,5 +40,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Setup")
 	float AcceptanceRadius = 7500.0f; // Check Radius In cm
 
+	// Checks whether the player is in sight or not
 	bool PlayerInSight();
+
+	// Helper function for Player in Sight Ray-cast
+	void GetRayCastStartAndEnd(FVector& StartLocation, FVector& EndLocation);
 };

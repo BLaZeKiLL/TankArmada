@@ -22,6 +22,7 @@ void AMortarAIController::Tick(float DeltaTime)
 	/// DOUBLE CHECK ensure() MACRO
 	if (!ensure(PlayerTank && ControlledMortar && AimingComponent)) { return; }
 
+	/// Always Aim at the Player
 	AimingComponent->AimAt(PlayerTank->GetActorLocation());
 
 	/// Fire at the Player if locked

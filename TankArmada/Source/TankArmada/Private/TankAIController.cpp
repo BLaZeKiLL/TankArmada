@@ -26,11 +26,14 @@ void ATankAIController::Tick(float DeltaTime)
 	
 	MoveTowardsPlayer(PlayerTank, AcceptanceRadius);
 
+	/// Always Aim at the Player if in sight
+	AimingComponent->AimAt(PlayerTank->GetActorLocation());
+
 	if (PlayerInSight())
 	{
-
+		// #TODO which feels better aim when visible or aim always ?
 		/// Always Aim at the Player if in sight
-		AimingComponent->AimAt(PlayerTank->GetActorLocation());
+		//AimingComponent->AimAt(PlayerTank->GetActorLocation());
 		
 		/// Fire at the Player if locked
 		if ((AimingComponent->GetFiringStatus() == EFiringStatus::Locked))
@@ -51,7 +54,7 @@ void ATankAIController::MoveTowardsPlayer(APawn * PlayerTank, float DynamicAccep
 	);
 }
 
-
+// Function for binding death delegate function
 void ATankAIController::SetPawn(APawn* InPawn)
 {
 	Super::SetPawn(InPawn);
@@ -74,30 +77,53 @@ void ATankAIController::OnPossessedTankDeath()
 // Checks whether the player is in sight or not
 bool ATankAIController::PlayerInSight()
 {
-	auto AIRayCast = Cast<USceneComponent>((GetPawn()->GetComponentsByTag(USceneComponent::StaticClass(), FName("AI")))[0]);
-	auto StartLocation = AIRayCast->GetComponentLocation();
-	auto EndLocation = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	/// Pass the references of start and end to utility functions
+	FVector StartLocation, EndLocation;
+	GetRayCastStartAndEnd(StartLocation, EndLocation);
+
 	FHitResult OutHitResult;
 
+	// Ignore Self as a Hit-Result for Line Trace
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.AddIgnoredActor(GetOwner());
+
+	/// Line Trace
 	if (GetWorld()->LineTraceSingleByChannel(
 		OutHitResult,
 		StartLocation,
 		EndLocation,
-		ECollisionChannel::ECC_Visibility
+		ECollisionChannel::ECC_Visibility,
+		CollisionParams
 	))
 	{
 		if (OutHitResult.GetActor() == Cast<AActor>(GetWorld()->GetFirstPlayerController()->GetPawn()))
 		{
+			// Player Visible
 			return true;
 		}
 		else
 		{
+			// Player Not Visible
 			return false;
 		}
 	}
 	else
 	{
+		// Line Trace fail
 		return false;
 	}
 }
 
+
+void ATankAIController::GetRayCastStartAndEnd(FVector& StartLocation, FVector& EndLocation)
+{
+	// Location of the visible component on the AI tank
+	StartLocation = Cast<USceneComponent>(
+		(GetPawn()->GetComponentsByTag(USceneComponent::StaticClass(), FName("AI")))[0]
+		)->GetComponentLocation();
+
+	// Location of the visible component on the Player tank
+	EndLocation = Cast<USceneComponent>(
+		(GetWorld()->GetFirstPlayerController()->GetPawn()->GetComponentsByTag(USceneComponent::StaticClass(), FName("AI")))[0]
+		)->GetComponentLocation();
+}
